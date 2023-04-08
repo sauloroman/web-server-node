@@ -5,6 +5,7 @@ const hbs = require('hbs')
 
 // HBS - Handlebars
 
+app.use( express.static('./public') )
 app.set('view engine', 'hbs')
 
 hbs.registerPartials( __dirname + '/views/partials', (err) => {
@@ -33,19 +34,18 @@ app.get('/elements', ( req, res ) => {
 })
 
 
-app.use( express.static('./public') )
 
-// app.get('/generic', ( req, res ) => {
-//   res.sendFile( __dirname + '/public/generic.html' )
-// })
+app.get('/generic', ( req, res ) => {
+  res.sendFile( __dirname + '/public/generic.html' )
+})
 
-// app.get('/elements', ( req, res ) => {
-//   res.sendFile( __dirname + '/public/elements.html' )
-// })
+app.get('/elements', ( req, res ) => {
+  res.sendFile( __dirname + '/public/elements.html' )
+})
 
-// app.get('*', ( _req, res ) => {
-//   res.sendFile( __dirname + '/public/404.html')
-// })
+app.get('*', ( _req, res ) => {
+  res.sendFile( __dirname + '/public/404.html')
+})
 
 const port = process.env.PORT || 8080
 app.listen( port, () => console.log(`Serve listening at port ${port}`))
